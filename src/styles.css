@@ -5,10 +5,14 @@ body {
 }
 body {
   position: relative;
+  margin: 0 auto;
 }
 
 #root {
   width: 100vw;
 }
+<<<<<<< HEAD
 =======
 >>>>>>> 69818d5 (Revert "added styles back for testing")
+=======
+>>>>>>> 847db50 (centered cards with infinte carousel working :fire:)

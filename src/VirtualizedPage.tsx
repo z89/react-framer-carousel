@@ -10,10 +10,12 @@ interface VirtualizedPageProps {
 
 const containerStyle: MotionStyle = {
   position: "relative",
-  width: "100%",
+  width: "80%",
+  left: "50%",
+  translateX: "-45%",
   height: "100%",
-  overflowX: "hidden",
-  // overflowX: "hidden",
+  display: "flex",
+  alignItems: "center",
 };
 
 const transition: AnimationOptions<any> = {
@@ -27,9 +29,10 @@ export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
   const [index, setIndex] = React.useState(0);
 
   const calculateNewX = () => -index * (containerRef.current?.clientWidth || 0);
+  const clientWidth = containerRef.current?.clientWidth || 0;
 
   const handleEndDrag = (e: Event, dragProps: PanInfo) => {
-    const clientWidth = containerRef.current?.clientWidth || 0;
+    console.log(clientWidth);
 
     const { offset, velocity } = dragProps;
 
