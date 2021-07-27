@@ -5,15 +5,13 @@ const images = ["https://cdn.chec.io/merchants/28103/assets/dNerYBJ92nLShy8J|pex
 export default function App() {
   return (
     <div className="app">
-      <div style={{ width: "100vw", height: "80vh" }}>
-        <VirtualizedPage>
-          {({ index }) => {
-            const modulo = index % images.length;
-            const imageIndex = modulo < 0 ? images.length + modulo : modulo;
-            return <img draggable={false} alt="Mountain" style={{ width: "100%", height: "100%", objectFit: "cover", overflow: "hidden" }} src={images[imageIndex]} />;
-          }}
-        </VirtualizedPage>
-      </div>
+      <VirtualizedPage>
+        {({ index }) => {
+          const modulo = index % images.length;
+          const imageIndex = modulo < 0 ? images.length + modulo : modulo;
+          return <img draggable={false} alt="Mountain" style={{ width: "100%", height: "100%", objectFit: "cover", overflow: "hidden" }} src={images[imageIndex]} />;
+        }}
+      </VirtualizedPage>
     </div>
   );
 }

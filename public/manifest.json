@@ -1,0 +1,6 @@
+{
+  "short_name": "rfc",
+  "name": "react-framer-carousel",
+  "start_url": "/",
+  "display": "standalone"
+}

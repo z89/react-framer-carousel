@@ -2,10 +2,11 @@ import { motion, MotionStyle, MotionValue, PanInfo } from "framer-motion";
 import React, { FunctionComponent } from "react";
 
 interface PageProps {
-  index: number;
-  renderPage: (props: { index: number }) => JSX.Element;
   x: MotionValue;
   onDragEnd(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void;
+  index: number;
+  active: boolean;
+  renderPage: (props: { index: number }) => JSX.Element;
 }
 
 const pageStyle: MotionStyle = {
@@ -19,9 +20,16 @@ const pageStyle: MotionStyle = {
   overflow: "hidden",
 };
 
-export const Page: FunctionComponent<PageProps> = ({ index, renderPage, x, onDragEnd }) => {
+export const Page: FunctionComponent<PageProps> = ({ x, onDragEnd, index, active, renderPage }) => {
   const child = React.useMemo(() => renderPage({ index }), [index, renderPage]);
-
+  const variants = {
+    center: (active: number) => {
+      return {
+        scale: active ? 1.05 : 0.95,
+        opacity: active ? 1 : 0.5,
+      };
+    },
+  };
   return (
     <motion.div
       style={{
@@ -34,6 +42,13 @@ export const Page: FunctionComponent<PageProps> = ({ index, renderPage, x, onDra
       drag="x"
       dragElastic={0.2}
       onDragEnd={onDragEnd}
+      variants={variants}
+      custom={active}
+      animate={"center"}
+      transition={{
+        type: "spring",
+        duration: 0.4,
+      }}
     >
       {child}
     </motion.div>

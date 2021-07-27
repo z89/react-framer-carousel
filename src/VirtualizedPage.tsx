@@ -13,9 +13,9 @@ const containerStyle: MotionStyle = {
   width: "80%",
   left: "50%",
   translateX: "-45%",
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
+
+  backgroundColor: "red",
+  marginTop: "1rem",
 };
 
 const transition: AnimationOptions<any> = {
@@ -32,8 +32,6 @@ export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
   const clientWidth = containerRef.current?.clientWidth || 0;
 
   const handleEndDrag = (e: Event, dragProps: PanInfo) => {
-    console.log(clientWidth);
-
     const { offset, velocity } = dragProps;
 
     if (Math.abs(velocity.y) > Math.abs(velocity.x)) {
@@ -52,13 +50,16 @@ export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
 
   React.useEffect(() => {
     const controls = animate(x, calculateNewX(), transition);
+    console.log("--");
     return controls.stop;
   }, [index]);
 
   return (
     <motion.div ref={containerRef} style={containerStyle}>
       {range.map((rangeValue) => {
-        return <Page key={rangeValue + index} x={x} onDragEnd={handleEndDrag} index={rangeValue + index} renderPage={children} />;
+        console.log(rangeValue + index);
+
+        return <Page key={rangeValue + index} x={x} onDragEnd={handleEndDrag} index={rangeValue + index} active={index + rangeValue == index ? true : false} renderPage={children} />;
       })}
     </motion.div>
   );
