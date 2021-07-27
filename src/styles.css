@@ -1,3 +1,11 @@
-.App {
-  text-align: center;
+html,
+body {
+  overflow-x: hidden;
+}
+body {
+  position: relative;
+}
+
+#root {
+  width: 100vw;
 }
