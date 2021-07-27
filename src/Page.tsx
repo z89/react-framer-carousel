@@ -10,16 +10,16 @@ interface PageProps {
 
 const pageStyle: MotionStyle = {
   position: "absolute",
-  width: "100%",
+  width: "75vw",
+  backgroundColor: "white",
+  boxShadow: "0px 12px 15px #cccccc",
+  border: "4px solid white",
+  borderRadius: "50px",
   height: "100%",
+  overflow: "hidden",
 };
 
-export const Page: FunctionComponent<PageProps> = ({
-  index,
-  renderPage,
-  x,
-  onDragEnd,
-}) => {
+export const Page: FunctionComponent<PageProps> = ({ index, renderPage, x, onDragEnd }) => {
   const child = React.useMemo(() => renderPage({ index }), [index, renderPage]);
 
   return (
@@ -32,7 +32,7 @@ export const Page: FunctionComponent<PageProps> = ({
       }}
       draggable
       drag="x"
-      dragElastic={1}
+      dragElastic={0.2}
       onDragEnd={onDragEnd}
     >
       {child}
