@@ -10,12 +10,12 @@ interface PageProps {
 
 const pageStyle: MotionStyle = {
   position: "absolute",
-  width: "75vw",
+  width: "70vw",
+  height: "60vh",
   backgroundColor: "white",
   boxShadow: "0px 12px 15px #cccccc",
   border: "4px solid white",
   borderRadius: "50px",
-  height: "100%",
   overflow: "hidden",
 };
 
