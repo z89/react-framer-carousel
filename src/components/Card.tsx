@@ -1,27 +1,26 @@
 import { motion, MotionStyle, MotionValue, PanInfo } from "framer-motion";
 import React, { FunctionComponent } from "react";
 
-interface PageProps {
+interface CardProps {
   x: MotionValue;
   onDragEnd(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void;
   index: number;
   active: boolean;
-  renderPage: (props: { index: number }) => JSX.Element;
+  renderCard: (props: { index: number }) => JSX.Element;
 }
 
-const pageStyle: MotionStyle = {
+const CardStyle: MotionStyle = {
   position: "absolute",
   width: "70vw",
   height: "60vh",
   backgroundColor: "white",
   boxShadow: "0px 12px 15px #cccccc",
-  border: "4px solid white",
   borderRadius: "50px",
   overflow: "hidden",
 };
 
-export const Page: FunctionComponent<PageProps> = ({ x, onDragEnd, index, active, renderPage }) => {
-  const child = React.useMemo(() => renderPage({ index }), [index, renderPage]);
+export const Card: FunctionComponent<CardProps> = ({ x, onDragEnd, index, active, renderCard }) => {
+  const child = React.useMemo(() => renderCard({ index }), [index, renderCard]);
   const variants = {
     center: (active: number) => {
       return {
@@ -33,7 +32,7 @@ export const Page: FunctionComponent<PageProps> = ({ x, onDragEnd, index, active
   return (
     <motion.div
       style={{
-        ...pageStyle,
+        ...CardStyle,
         x,
         left: `${index * 100}%`,
         right: `${index * 100}%`,
@@ -54,5 +53,3 @@ export const Page: FunctionComponent<PageProps> = ({ x, onDragEnd, index, active
     </motion.div>
   );
 };
-
-Page.displayName = "page";
