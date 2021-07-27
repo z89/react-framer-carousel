@@ -1,10 +1,10 @@
 import * as React from "react";
 import { animate, AnimationOptions, motion, MotionStyle, PanInfo, useMotionValue } from "framer-motion";
-import { Page } from "./Page";
+import { Card } from "./Card";
 
 const range = [-2, -1, 0, 1, 2];
 
-interface VirtualizedPageProps {
+interface CarouselProps {
   children: (props: { index: number }) => JSX.Element;
 }
 
@@ -12,7 +12,7 @@ const containerStyle: MotionStyle = {
   position: "relative",
   width: "80%",
   left: "50%",
-  translateX: "-45%",
+  translateX: "-44%",
 
   backgroundColor: "red",
   marginTop: "1rem",
@@ -23,7 +23,7 @@ const transition: AnimationOptions<any> = {
   bounce: 0,
 };
 
-export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({ children }) => {
+export const Carousel: React.FunctionComponent<CarouselProps> = ({ children }) => {
   const x = useMotionValue(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [index, setIndex] = React.useState(0);
@@ -50,19 +50,14 @@ export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
 
   React.useEffect(() => {
     const controls = animate(x, calculateNewX(), transition);
-    console.log("--");
     return controls.stop;
   }, [index]);
 
   return (
     <motion.div ref={containerRef} style={containerStyle}>
       {range.map((rangeValue) => {
-        console.log(rangeValue + index);
-
-        return <Page key={rangeValue + index} x={x} onDragEnd={handleEndDrag} index={rangeValue + index} active={index + rangeValue == index ? true : false} renderPage={children} />;
+        return <Card key={rangeValue + index} x={x} onDragEnd={handleEndDrag} index={rangeValue + index} active={index + rangeValue == index ? true : false} renderCard={children} />;
       })}
     </motion.div>
   );
 };
-
-VirtualizedPage.displayName = "VirtualizedPage";
