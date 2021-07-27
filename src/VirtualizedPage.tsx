@@ -1,15 +1,8 @@
 import * as React from "react";
-import {
-  animate,
-  AnimationOptions,
-  motion,
-  MotionStyle,
-  PanInfo,
-  useMotionValue,
-} from "framer-motion";
+import { animate, AnimationOptions, motion, MotionStyle, PanInfo, useMotionValue } from "framer-motion";
 import { Page } from "./Page";
 
-const range = [-1, 0, 1];
+const range = [-2, -1, 0, 1, 2];
 
 interface VirtualizedPageProps {
   children: (props: { index: number }) => JSX.Element;
@@ -20,6 +13,7 @@ const containerStyle: MotionStyle = {
   width: "100%",
   height: "100%",
   overflowX: "hidden",
+  // overflowX: "hidden",
 };
 
 const transition: AnimationOptions<any> = {
@@ -27,9 +21,7 @@ const transition: AnimationOptions<any> = {
   bounce: 0,
 };
 
-export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
-  children,
-}) => {
+export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({ children }) => {
   const x = useMotionValue(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [index, setIndex] = React.useState(0);
@@ -63,15 +55,7 @@ export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
   return (
     <motion.div ref={containerRef} style={containerStyle}>
       {range.map((rangeValue) => {
-        return (
-          <Page
-            key={rangeValue + index}
-            x={x}
-            onDragEnd={handleEndDrag}
-            index={rangeValue + index}
-            renderPage={children}
-          />
-        );
+        return <Page key={rangeValue + index} x={x} onDragEnd={handleEndDrag} index={rangeValue + index} renderPage={children} />;
       })}
     </motion.div>
   );
