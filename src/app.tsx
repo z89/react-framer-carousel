@@ -1,7 +1,12 @@
 import "./styles.css";
 import { Carousel } from "./components/Carousel";
 
-const images = ["https://cdn.chec.io/merchants/28103/assets/dNerYBJ92nLShy8J|pexels-ben-7864977.jpg", "https://cdn.chec.io/merchants/28103/assets/ke6yJaTpVE206rSG|pexels-ben-7864982.jpg", "https://cdn.chec.io/merchants/28103/assets/QLfW4yFwLUlNRl5n|pexels-ben-7865076.jpg"];
+const images = [
+  "https://cdn.chec.io/merchants/28103/assets/dNerYBJ92nLShy8J|pexels-ben-7864977.jpg",
+  "https://cdn.chec.io/merchants/28103/assets/ke6yJaTpVE206rSG|pexels-ben-7864982.jpg",
+  "https://cdn.chec.io/merchants/28103/assets/QLfW4yFwLUlNRl5n|pexels-ben-7865076.jpg",
+];
+
 export default function App() {
   return (
     <div className="app">
